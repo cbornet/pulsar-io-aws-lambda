@@ -1,12 +1,14 @@
 # AWS Lambda connector
 
-The [AWS Lambda](https://aws.amazon.com/lambda/) sink connector is a [Pulsar IO connector](http://pulsar.apache.org/docs/en/next/io-overview/) for sending messages from Apache Pulsar to Amazon AWS Lambda.
+The [AWS Lambda](https://aws.amazon.com/lambda/) sink connector is a [Pulsar IO connector](http://pulsar.apache.org/docs/en/next/io-overview/) for pulling data from Pulsar topics and persists data to AWS Lambda to invoke Lambda functions. 
 
-Currently, AWS Lambda connector versions (`x.y.z`) are based on Pulsar versions (`x.y.z`).
+![](docs/lambda-sink.png)
 
-| AWS Lambda connector version | Pulsar version | Doc |
+Currently, AWS Lambda sink connector versions (`x.y.z`) are based on Pulsar versions (`x.y.z`).
+
+| AWS Lambda sink connector version | Pulsar version | Doc |
 | :---------- | :------------------- | :------------- |
-[2.7.0](https://github.com/streamnative/pulsar-io-aws-lambda/releases/tag/v2.7.0)| [2.7.0](http://pulsar.apache.org/en/download/) | - [AWS lambda sink connector](#TBD)
+[2.7.0](https://github.com/streamnative/pulsar-io-aws-lambda/releases/tag/v2.7.0)| [2.7.0](http://pulsar.apache.org/en/download/) | - [AWS Lambda sink connector](https://github.com/streamnative/pulsar-io-aws-lambda/blob/branch-2.7.0/docs/aws-lambda-sink.md)
 
 ## Project layout
 
