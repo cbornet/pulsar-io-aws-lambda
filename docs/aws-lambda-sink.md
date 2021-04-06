@@ -21,9 +21,9 @@ owner_img: "/images/streamnative.png"
 id: "aws-lambda-sink"
 ---
 
-The [AWS Lambda](https://aws.amazon.com/lambda/) sink connector is a [Pulsar IO connector](http://pulsar.apache.org/docs/en/next/io-overview/) for sending messages from Apache Pulsar to Amazon AWS Lambda.
+The [AWS Lambda](https://aws.amazon.com/lambda/) sink connector is a [Pulsar IO connector](http://pulsar.apache.org/docs/en/next/io-overview/) for pulling data from Pulsar topics and persists data to AWS Lambda to invoke Lambda functions.
 
-![](/docs/aws-lambda-sink.png)
+![](/docs/lambda-sink.png)
 
 # How to get 
 
@@ -63,7 +63,7 @@ You can create a configuration file (JSON or YAML) to set the following properti
 | `awsEndpoint` |String| false | " " (empty string) | AWS Lambda end-point URL. It can be found at [here](https://docs.aws.amazon.com/general/latest/gr/lambda-service.html). |
 | `awsRegion` | String| true | " " (empty string) | Supported AWS region. For example, us-west-1, us-west-2. |
 | `awsCredentialPluginName` | String|false | " " (empty string) | Fully-qualified class name of implementation of `AwsCredentialProviderPlugin`. |
-| `awsCredentialPluginParam` | String|true | " " (empty string) | JSON parameter to initialize `AwsCredentialsProviderPlugin`. |
+| `awsCredentialPluginParam` | String|true | " " (empty string) | JSON parameter to initialize. `AwsCredentialsProviderPlugin`. |
 | `lambdaFunctionName` | String|true | " " (empty string) | The Lambda function that should be invoked by the messages. |
 | `synchronousInvocation` | Boolean|true | true | `true` means invoking a Lambda function synchronously. <br>`false` means invoking a Lambda function asynchronously. |
 
@@ -170,7 +170,9 @@ This example describes how to use the AWS Lambda sink connector to pull data fro
     PULSAR_HOME/bin/pulsar-client produce public/default/test-queue-pulsar --messages hello -n 10
     ```
 
-6. Monitoring the Lambda function status through the [AWS Lambda console](https://console.aws.amazon.com/lambda/home#/functions), or refer to the guide of [monitoring and troubleshooting Lambda applications](https://docs.aws.amazon.com/lambda/latest/dg/lambda-monitoring.html).
+6. Monitor the Lambda function status through the [AWS Lambda console](https://console.aws.amazon.com/lambda/home#/functions).
+
+    For more information, see [monitoring and troubleshooting Lambda applications](https://docs.aws.amazon.com/lambda/latest/dg/lambda-monitoring.html).
 
 ### On-premises cluster
 
@@ -233,7 +235,7 @@ This example explains how to create an AWS Lambda sink connector in an on-premis
     > For more information about how to upgrade a Pulsar cluster with Helm, see [Upgrade Guide](https://docs.streamnative.io/platform/latest/install-and-upgrade/helm/install/upgrade).
 
 
-5. Create AWS Lambda sink connector on a Pulsar cluster using the [`pulsar-admin sinks create`](http://pulsar.apache.org/tools/pulsar-admin/2.8.0-SNAPSHOT/#-em-create-em--24) command.
+5. Create a AWS Lambda sink connector on a Pulsar cluster using the [`pulsar-admin sinks create`](http://pulsar.apache.org/tools/pulsar-admin/2.8.0-SNAPSHOT/#-em-create-em--24) command.
 
     ```
     PULSAR_HOME/bin/pulsar-admin sinks create \
