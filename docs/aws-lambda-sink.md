@@ -63,7 +63,7 @@ You can create a configuration file (JSON or YAML) to set the following properti
 | `awsEndpoint` |String| false | " " (empty string) | AWS Lambda end-point URL. It can be found at [here](https://docs.aws.amazon.com/general/latest/gr/lambda-service.html). |
 | `awsRegion` | String| true | " " (empty string) | Supported AWS region. For example, us-west-1, us-west-2. |
 | `awsCredentialPluginName` | String|false | " " (empty string) | Fully-qualified class name of implementation of `AwsCredentialProviderPlugin`. |
-| `awsCredentialPluginParam` | String|true | " " (empty string) | JSON parameter to initialize. `AwsCredentialsProviderPlugin`. |
+| `awsCredentialPluginParam` | String|true | " " (empty string) | JSON parameter to initialize `AwsCredentialsProviderPlugin`. |
 | `lambdaFunctionName` | String|true | " " (empty string) | The Lambda function that should be invoked by the messages. |
 | `synchronousInvocation` | Boolean|true | true | `true` means invoking a Lambda function synchronously. <br>`false` means invoking a Lambda function asynchronously. |
 
