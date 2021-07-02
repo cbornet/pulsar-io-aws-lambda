@@ -26,12 +26,9 @@ jobs:
           cp README.md ./pulsar-io-aws-lambda-readme.md
           echo "ls pulsar-*"
           ls pulsar-*
-      - name: publish
-        uses: skx/github-action-publish-binaries@release-0.11
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          args: 'pulsar-*'
+          echo "::set-output name=nar-file::pulsar-io-aws-lambda-${version}.nar"
+          echo "::set-output name=readme-file::pulsar-io-aws-lambda-readme.md"
+
       - name: build and push docker image
         run: |
           PULSAR_VERSION=`./scripts/get-project-version/get-project-version.py`
