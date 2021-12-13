@@ -65,7 +65,7 @@ docker run  --network aws-lambda-test -d --rm --name localstack \
             -v ${SRC_DIR}/.ci/integrations/test-function:/tmp/test-function \
             -v /var/run/docker.sock:/var/run/docker.sock \
             -v ${SRC_DIR}/.ci/integrations/.localstack:/tmp/localstack \
-            localstack/localstack:latest
+            localstack/localstack:0.12.17
 
 sudo echo "127.0.0.1 localstack" | sudo tee -a /etc/hosts
 echo "-- Wait for localstack service to be ready"
