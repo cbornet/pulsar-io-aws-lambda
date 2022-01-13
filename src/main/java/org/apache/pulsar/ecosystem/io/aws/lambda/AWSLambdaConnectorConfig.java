@@ -71,6 +71,7 @@ public class AWSLambdaConnectorConfig implements Serializable {
     @FieldDoc(
             required = false,
             defaultValue = "",
+            sensitive = true,
             help = "json-parameters to initialize `AwsCredentialsProviderPlugin`")
     private String awsCredentialPluginParam = "";
 
