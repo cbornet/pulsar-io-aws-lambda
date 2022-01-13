@@ -26,7 +26,10 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.pulsar.io.common.IOConfigUtils;
+import org.apache.pulsar.io.core.SinkContext;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 /**
  * Unit test {@link AWSLambdaConnectorConfig}.
@@ -89,6 +92,32 @@ public class AWSLambdaConnectorConfigTest {
         } catch (Exception ex) {
             assertNotNull("Missing param should lead to exception", ex);
         }
+    }
+
+    /*
+     * Test Case: init sink connector with secrets.
+     */
+    @Test
+    public void testLoadFromSecret() throws IOException {
+        Map<String, Object> properties = new HashMap<>();
+        properties.put("awsRegion", "us-east-1");
+        properties.put("lambdaFunctionName", "test-function");
+        properties.put("awsEndpoint", "https://some.endpoint.aws");
+
+        SinkContext sinkContext = Mockito.mock(SinkContext.class);
+        Mockito.when(sinkContext.getSecret("awsCredentialPluginParam"))
+                .thenReturn("{\"accessKey\":\"myKey\",\"secretKey\":\"my-Secret\"}");
+
+        AWSLambdaConnectorConfig config =
+                IOConfigUtils.loadWithSecrets(properties, AWSLambdaConnectorConfig.class, sinkContext);
+        assertEquals("Mismatched Region : " + config.getAwsRegion(),
+                "us-east-1", config.getAwsRegion());
+        assertEquals("Mismatched Lambda Function Name : " + config.getLambdaFunctionName(),
+                "test-function", config.getLambdaFunctionName());
+        assertEquals("Mismatched awsEndpoint : " + config.getAwsEndpoint(),
+                "https://some.endpoint.aws", config.getAwsEndpoint());
+        assertEquals("Mismatched awsCredentialPluginParam : " + config.getAwsCredentialPluginParam(),
+                "{\"accessKey\":\"myKey\",\"secretKey\":\"my-Secret\"}", config.getAwsCredentialPluginParam());
     }
 
 }
