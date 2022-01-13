@@ -40,6 +40,7 @@ import lombok.Setter;
 import org.apache.pulsar.functions.api.Record;
 import org.apache.pulsar.io.aws.AbstractAwsConnector;
 import org.apache.pulsar.io.aws.AwsCredentialProviderPlugin;
+import org.apache.pulsar.io.common.IOConfigUtils;
 import org.apache.pulsar.io.core.Sink;
 import org.apache.pulsar.io.core.SinkContext;
 
@@ -82,7 +83,9 @@ public class AWSLambdaAbstractSink<T> extends AbstractAwsConnector implements Si
     @Override
     public void open(Map<String, Object> map, SinkContext sinkContext) throws Exception {
         this.sinkContext = sinkContext;
-        setConfig(AWSLambdaConnectorConfig.load(map));
+        AWSLambdaConnectorConfig config =
+                IOConfigUtils.loadWithSecrets(map, AWSLambdaConnectorConfig.class, sinkContext);
+        setConfig(config);
         prepareAWSLambda();
     }
 
@@ -199,8 +202,7 @@ public class AWSLambdaAbstractSink<T> extends AbstractAwsConnector implements Si
                     payload.setTopicName(message.getTopicName().get());
                 }
                 if (message.getProperties() != null && !message.getProperties().isEmpty()) {
-                    Map<String, String> p = new HashMap<>();
-                    message.getProperties().forEach(p::put);
+                    Map<String, String> p = new HashMap<>(message.getProperties());
                     payload.setProperties(p);
                 }
 
