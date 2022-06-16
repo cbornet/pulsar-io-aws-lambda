@@ -33,7 +33,7 @@ This section describes how to build the AWS Lambda sink connector.
 
 You can get the AWS Lambda sink connector using one of the following methods if you use [Pulsar Function Worker](https://pulsar.apache.org/docs/en/functions-worker/) to run connectors in a cluster.
 
-- Download the NAR package from [the download page](https://github.com/streamnative/pulsar-io-aws-lambda/releases/download/v{{connector:version}}/pulsar-io-google-pubsub-{{connector:version}}.nar).
+- Download the NAR package from [the download page](https://github.com/streamnative/pulsar-io-aws-lambda/releases/download/v2.9.2.21/pulsar-io-google-pubsub-2.9.2.21.nar).
 
 - Build it from the source code.
 
@@ -55,7 +55,7 @@ To build the AWS Lambda sink connector from the source code, follow these steps.
 
      ```bash
      ls target
-     pulsar-io-aws-lambda-{{connector:version}}.nar
+     pulsar-io-aws-lambda-2.9.2.21.nar
      ```
 
 ## Work with Function Mesh
@@ -91,7 +91,7 @@ You can create a configuration file (JSON or YAML) to set the properties if you 
       "inputs": [
         "test-aws-lambda-topic"
       ],
-      "archive": "connectors/pulsar-io-aws-lambda-{{connector:version}}.nar",
+      "archive": "connectors/pulsar-io-aws-lambda-2.9.2.21.nar",
       "parallelism": 1,
       "configs":
       {
@@ -113,7 +113,7 @@ You can create a configuration file (JSON or YAML) to set the properties if you 
    name: "aws-lambda-sink"
    inputs: 
     - "test-aws-lambda-topic"
-   archive: "connectors/pulsar-io-aws-lambda-{{connector:version}}.nar"
+   archive: "connectors/pulsar-io-aws-lambda-2.9.2.21.nar"
    parallelism: 1
 
    configs:
@@ -137,7 +137,7 @@ kind: Sink
 metadata:
   name: aws-lambda-sink-sample
 spec:
-  image: streamnative/pulsar-io-aws-lambda:{{connector:version}}
+  image: streamnative/pulsar-io-aws-lambda:2.9.2.21
   className: org.apache.pulsar.ecosystem.io.aws.lambda.AWSLambdaBytesSink
   replicas: 1
   input:
@@ -161,7 +161,7 @@ spec:
     cpu: "0.1"
     memory: 1G
   java:
-    jar: connectors/pulsar-io-aws-lambda-{{connector:version}}.nar
+    jar: connectors/pulsar-io-aws-lambda-2.9.2.21.nar
   clusterName: test-pulsar
   autoAck: true
 ```
@@ -184,7 +184,7 @@ This example shows how to create an AWS Lambda sink connector on a Pulsar cluste
 
 ```bash
 PULSAR_HOME/bin/pulsar-admin sinks create \
---archive pulsar-io-aws-lambda-{{connector:version}}.nar \
+--archive pulsar-io-aws-lambda-2.9.2.21.nar \
 --sink-config-file aws-lambda-sink-config.yaml \
 --classname org.apache.pulsar.ecosystem.io.aws.lambda.AWSLambdaBytesSink \
 --name aws-lambda-sink
@@ -207,8 +207,8 @@ This example describes how to use the AWS Lambda sink connector to pull messages
 2. Copy the NAR package of the AWS Lambda connector to the Pulsar connectors directory.
 
     ```
-    cp pulsar-io-aws-lambda-{{connector:version}}.nar 
-    PULSAR_HOME/connectors/pulsar-io-aws-lambda-{{connector:version}}.nar
+    cp pulsar-io-aws-lambda-2.9.2.21.nar 
+    PULSAR_HOME/connectors/pulsar-io-aws-lambda-2.9.2.21.nar
     ```
 
 3. Start Pulsar in standalone mode.
@@ -242,8 +242,8 @@ This example explains how to create an AWS Lambda sink connector in an on-premis
 1. Copy the NAR package of the AWS Lambda connector to the Pulsar connectors directory.
 
     ```
-    cp pulsar-io-aws-lambda-{{connector:version}}.nar     
-    PULSAR_HOME/connectors/pulsar-io-aws-lambda-{{connector:version}}.nar
+    cp pulsar-io-aws-lambda-2.9.2.21.nar     
+    PULSAR_HOME/connectors/pulsar-io-aws-lambda-2.9.2.21.nar
     ```
 
 2. Reload all [built-in connectors](https://pulsar.apache.org/docs/en/next/io-connectors/).
@@ -295,7 +295,7 @@ This example describes how to create an AWS Lambda sink connector for a Kuberbet
     metadata:
       name: aws-lambda-sink-sample
     spec:
-      image: streamnative/pulsar-io-aws-lambda:{{connector:version}}
+      image: streamnative/pulsar-io-aws-lambda:2.9.2.21
       className: org.apache.pulsar.ecosystem.io.aws.lambda.AWSLambdaBytesSink
       replicas: 1
       input:
@@ -319,7 +319,7 @@ This example describes how to create an AWS Lambda sink connector for a Kuberbet
         cpu: "0.1"
         memory: 1G
       java:
-        jar: connectors/pulsar-io-aws-lambda-{{connector:version}}.nar
+        jar: connectors/pulsar-io-aws-lambda-2.9.2.21.nar
       clusterName: test-pulsar
       autoAck: true
     ```
